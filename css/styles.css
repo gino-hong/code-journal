@@ -3,10 +3,13 @@ body {
 }
 
 label,
-h1,
 button {
   font-family: "Proza Libre", sans-serif;
   font-weight: 900;
+}
+
+h1 {
+  font-family: "Proza Libre", sans-serif;
 }
 
 label {
