@@ -30,3 +30,42 @@ $form.addEventListener('submit', function (event) {
   $form.reset();
   $image.src = 'images/placeholder-image-square.jpg';
 });
+
+function renderEntry(entry) {
+  var listItem = document.createElement('li');
+  listItem.setAttribute('class', 'container mb20');
+
+  var rowDiv = document.createElement('div');
+  rowDiv.setAttribute('class', 'row');
+  listItem.appendChild(rowDiv);
+
+  var firstColumnHalf = document.createElement('div');
+  firstColumnHalf.setAttribute('class', 'column-half');
+  rowDiv.appendChild(firstColumnHalf);
+
+  var entryImage = document.createElement('img');
+  entryImage.setAttribute('src', entry.photoUrl);
+  firstColumnHalf.appendChild(entryImage);
+
+  var secondColumnHalf = document.createElement('div');
+  secondColumnHalf.setAttribute('class', 'column-half');
+  rowDiv.appendChild(secondColumnHalf);
+
+  var entryHeading = document.createElement('h2');
+  entryHeading.textContent = entry.title;
+  secondColumnHalf.appendChild(entryHeading);
+
+  var entryParagraph = document.createElement('p');
+  entryParagraph.textContent = entry.notes;
+  secondColumnHalf.appendChild(entryParagraph);
+
+  return listItem;
+}
+
+var $ul = document.querySelector('ul');
+
+document.addEventListener('DOMContentLoaded', function () {
+  for (var i = data.entries.length - 1; i >= 0; i--) {
+    $ul.appendChild(renderEntry(data.entries[i]));
+  }
+});
