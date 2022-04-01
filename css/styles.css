@@ -1,15 +1,11 @@
 body {
   background-color: rgb(240 240 240);
+  font-family: "Proza Libre", sans-serif;
 }
 
 label,
 button {
-  font-family: "Proza Libre", sans-serif;
   font-weight: 900;
-}
-
-h1 {
-  font-family: "Proza Libre", sans-serif;
 }
 
 label {
@@ -29,7 +25,6 @@ img {
 }
 
 header {
-  font-family: "Proza Libre", sans-serif;
   font-size: 18px;
   background-color: #562b81;
   color: white;
@@ -73,4 +68,10 @@ button {
 
 .mb20 {
   margin-bottom: 20px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
