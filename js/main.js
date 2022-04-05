@@ -69,3 +69,19 @@ document.addEventListener('DOMContentLoaded', function () {
     $ul.appendChild(renderEntry(data.entries[i]));
   }
 });
+
+var $a = document.querySelector('a');
+var $entryForm = document.querySelector('#entry-form');
+var $entries = document.querySelector('#entries');
+
+$a.addEventListener('click', function () {
+  $entryForm.className = 'hidden';
+  $entries.className = '';
+});
+
+var $new = document.querySelector('#new');
+
+$new.addEventListener('click', function () {
+  $entryForm.className = '';
+  $entries.className = 'hidden';
+});

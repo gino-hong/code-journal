@@ -4,7 +4,8 @@ body {
 }
 
 label,
-button {
+button,
+#new {
   font-weight: 900;
 }
 
@@ -49,7 +50,8 @@ textarea {
   width: 100%;
 }
 
-button {
+button,
+#new {
   background-color: #562b81;
   color: white;
   border-radius: 5px;
@@ -62,6 +64,10 @@ button {
   text-align: right;
 }
 
+.tac {
+  text-align: center;
+}
+
 .mb10 {
   margin-bottom: 10px;
 }
@@ -70,8 +76,32 @@ button {
   margin-bottom: 20px;
 }
 
+.mt20 {
+  margin-top: 20px;
+}
+
 ul {
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+nav {
+  display: inline;
+  font-size: 16px;
+  padding: 0 10px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+#new {
+  margin-left: auto;
+  margin-right: 0;
 }
