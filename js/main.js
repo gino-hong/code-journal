@@ -29,6 +29,8 @@ $form.addEventListener('submit', function (event) {
   data.entries.unshift(object);
   $form.reset();
   $image.src = 'images/placeholder-image-square.jpg';
+  formToView();
+  $ul.appendChild(renderEntry(object));
 });
 
 function renderEntry(entry) {
@@ -74,14 +76,18 @@ var $a = document.querySelector('a');
 var $entryForm = document.querySelector('#entry-form');
 var $entries = document.querySelector('#entries');
 
-$a.addEventListener('click', function () {
+$a.addEventListener('click', formToView);
+
+function formToView() {
   $entryForm.className = 'hidden';
   $entries.className = '';
-});
+}
 
 var $new = document.querySelector('#new');
 
-$new.addEventListener('click', function () {
+$new.addEventListener('click', viewToForm);
+
+function viewToForm() {
   $entryForm.className = '';
   $entries.className = 'hidden';
-});
+}
