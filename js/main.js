@@ -31,6 +31,10 @@ $form.addEventListener('submit', function (event) {
   $image.src = 'images/placeholder-image-square.jpg';
   formToView();
   $ul.prepend(renderEntry(object));
+  if (data.entries.length === 0) {
+    var $placeholder = document.querySelector('#placeholder');
+    $placeholder.remove();
+  }
 });
 
 function renderEntry(entry) {
@@ -73,6 +77,7 @@ function renderAllEntries() {
     var noEntries = document.createElement('li');
     noEntries.textContent = 'No entries have been recorded.';
     noEntries.className = 'tac';
+    noEntries.id = 'placeholder';
     $ul.appendChild(noEntries);
   }
   for (var i = 0; i < data.entries.length; i++) {
