@@ -20,18 +20,19 @@
 <body>
   <header>
     <div class="container">
-      <div class="row">
+      <div>
         <div class="column-full">
           Code Journal
+          <nav><a href="#entries">Entries</a></nav>
         </div>
       </div>
     </div>
   </header>
   <main>
-    <div data-view="entry-form">
+    <div data-view="entry-form" id="entry-form" class="view">
       <form class="container">
-        <div class="row column-full">
-          <h1>New Entry</h1>
+        <div class="row">
+          <h2 class="column-full">New Entry</h2>
         </div>
         <div class="row">
           <div class="column-half mb20">
@@ -54,6 +55,21 @@
           </div>
         </div>
       </form>
+    </div>
+    <div data-view="entries" id="entries" class="view hidden">
+      <div class="container">
+        <div class="row space-between">
+          <h2>Entries</h2>
+          <div>
+            <div class="mt20">
+              <div id="new" class="tac"><a href="#entry-form">NEW</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ul>
+      </ul>
+    </div>
     </div>
   </main>
   <script src="js/data.js"></script>
