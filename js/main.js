@@ -83,6 +83,14 @@ function renderAllEntries() {
   for (var i = 0; i < data.entries.length; i++) {
     $ul.appendChild(renderEntry(data.entries[i]));
   }
+  var $view = document.querySelectorAll('.view');
+  for (var j = 0; j < $view.length; j++) {
+    if ($view[j].id === data.view) {
+      $view[j].className = 'view';
+    } else {
+      $view[j].className = 'view hidden';
+    }
+  }
 }
 
 var $a = document.querySelector('a');
@@ -92,8 +100,9 @@ var $entries = document.querySelector('#entries');
 $a.addEventListener('click', formToView);
 
 function formToView() {
-  $entryForm.className = 'hidden';
-  $entries.className = '';
+  $entryForm.className = 'view hidden';
+  $entries.className = 'view';
+  data.view = 'entries';
 }
 
 var $new = document.querySelector('#new');
@@ -101,6 +110,7 @@ var $new = document.querySelector('#new');
 $new.addEventListener('click', viewToForm);
 
 function viewToForm() {
-  $entryForm.className = '';
-  $entries.className = 'hidden';
+  $entryForm.className = 'view';
+  $entries.className = 'view hidden';
+  data.view = 'entry-form';
 }
