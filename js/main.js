@@ -124,3 +124,9 @@ function viewToForm() {
   $entries.className = 'view hidden';
   data.view = 'entry-form';
 }
+
+$ul.addEventListener('click', function (e) {
+  if (e.target.matches('i')) {
+    viewToForm();
+  }
+});
