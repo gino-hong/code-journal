@@ -69,6 +69,12 @@ var $ul = document.querySelector('ul');
 document.addEventListener('DOMContentLoaded', renderAllEntries);
 
 function renderAllEntries() {
+  if (data.entries.length === 0) {
+    var noEntries = document.createElement('li');
+    noEntries.textContent = 'No entries have been recorded.';
+    noEntries.className = 'tac';
+    $ul.appendChild(noEntries);
+  }
   for (var i = 0; i < data.entries.length; i++) {
     $ul.appendChild(renderEntry(data.entries[i]));
   }
