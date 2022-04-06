@@ -31,7 +31,7 @@ $form.addEventListener('submit', function (event) {
   $image.src = 'images/placeholder-image-square.jpg';
   formToView();
   $ul.prepend(renderEntry(object));
-  if (data.entries.length === 0) {
+  if (data.entries.length === 1) {
     var $placeholder = document.querySelector('#placeholder');
     $placeholder.remove();
   }
