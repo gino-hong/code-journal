@@ -104,3 +104,14 @@ button:hover {
 .space-between {
   justify-content: space-between;
 }
+
+.flex {
+  display: flex;
+}
+
+i {
+  margin-top: auto;
+  margin-bottom: auto;
+  color: #562b81;
+  font-size: 24px;
+}

@@ -57,9 +57,18 @@ function renderEntry(entry) {
   secondColumnHalf.setAttribute('class', 'column-half');
   rowDiv.appendChild(secondColumnHalf);
 
+  var titleRow = document.createElement('div');
+  titleRow.setAttribute('class', 'flex space-between');
+  secondColumnHalf.appendChild(titleRow);
+
   var entryHeading = document.createElement('h2');
   entryHeading.textContent = entry.title;
-  secondColumnHalf.appendChild(entryHeading);
+  titleRow.appendChild(entryHeading);
+
+  var icon = document.createElement('i');
+  icon.className = 'fas fa-pen';
+  icon.id = 'edit';
+  titleRow.appendChild(icon);
 
   var entryParagraph = document.createElement('p');
   entryParagraph.textContent = entry.notes;
