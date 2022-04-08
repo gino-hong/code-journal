@@ -129,5 +129,11 @@ $ul.addEventListener('click', function (e) {
   if (e.target.matches('i')) {
     viewToForm();
     data.editing = data.entries[data.entries.length - parseInt(e.target.id)];
+    var $title = document.querySelector('#title');
+    $title.value = data.editing.title;
+    $photoUrl.value = data.editing.photoUrl;
+    $image.src = $photoUrl.value;
+    var $notes = document.querySelector('#notes');
+    $notes.value = data.editing.notes;
   }
 });
