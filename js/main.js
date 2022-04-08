@@ -20,20 +20,35 @@ var $form = document.querySelector('form');
 
 $form.addEventListener('submit', function (event) {
   event.preventDefault();
-  var object = {};
-  object.title = $form.elements.title.value;
-  object.photoUrl = $form.elements.photoUrl.value;
-  object.notes = $form.elements.notes.value;
-  object.entryId = data.nextEntryId;
-  data.nextEntryId++;
-  data.entries.unshift(object);
-  $form.reset();
-  $image.src = 'images/placeholder-image-square.jpg';
-  formToView();
-  $ul.prepend(renderEntry(object));
-  if (data.entries.length === 1) {
-    var $placeholder = document.querySelector('#placeholder');
-    $placeholder.remove();
+  if (data.editing === null) {
+    var object = {};
+    object.title = $form.elements.title.value;
+    object.photoUrl = $form.elements.photoUrl.value;
+    object.notes = $form.elements.notes.value;
+    object.entryId = data.nextEntryId;
+    data.nextEntryId++;
+    data.entries.unshift(object);
+    $form.reset();
+    $image.src = 'images/placeholder-image-square.jpg';
+    formToView();
+    $ul.prepend(renderEntry(object));
+    if (data.entries.length === 1) {
+      var $placeholder = document.querySelector('#placeholder');
+      $placeholder.remove();
+    }
+  } else {
+    object = {};
+    object.title = $form.elements.title.value;
+    object.photoUrl = $form.elements.photoUrl.value;
+    object.notes = $form.elements.notes.value;
+    object.entryId = data.editing.entryId;
+    data.entries[data.entries.length - object.entryId] = object;
+    $ul.innerHTML = '';
+    renderAllEntries();
+    $form.reset();
+    $image.src = 'images/placeholder-image-square.jpg';
+    formToView();
+    data.editing = null;
   }
 });
 
