@@ -68,7 +68,7 @@ function renderEntry(entry) {
 
   var icon = document.createElement('i');
   icon.className = 'fas fa-pen';
-  icon.id = 'edit';
+  icon.id = entry.entryId;
   titleRow.appendChild(icon);
 
   var entryParagraph = document.createElement('p');
@@ -128,5 +128,6 @@ function viewToForm() {
 $ul.addEventListener('click', function (e) {
   if (e.target.matches('i')) {
     viewToForm();
+    data.editing = data.entries[data.entries.length - parseInt(e.target.id)];
   }
 });
