@@ -20,25 +20,41 @@ var $form = document.querySelector('form');
 
 $form.addEventListener('submit', function (event) {
   event.preventDefault();
-  var object = {};
-  object.title = $form.elements.title.value;
-  object.photoUrl = $form.elements.photoUrl.value;
-  object.notes = $form.elements.notes.value;
-  object.entryId = data.nextEntryId;
-  data.nextEntryId++;
-  data.entries.unshift(object);
-  $form.reset();
-  $image.src = 'images/placeholder-image-square.jpg';
-  formToView();
-  $ul.prepend(renderEntry(object));
-  if (data.entries.length === 1) {
-    var $placeholder = document.querySelector('#placeholder');
-    $placeholder.remove();
+  if (data.editing === null) {
+    var object = {};
+    object.title = $form.elements.title.value;
+    object.photoUrl = $form.elements.photoUrl.value;
+    object.notes = $form.elements.notes.value;
+    object.entryId = data.nextEntryId;
+    data.nextEntryId++;
+    data.entries.unshift(object);
+    $form.reset();
+    $image.src = 'images/placeholder-image-square.jpg';
+    formToView();
+    $ul.prepend(renderEntry(object));
+    if (data.entries.length === 1) {
+      var $placeholder = document.querySelector('#placeholder');
+      $placeholder.remove();
+    }
+  } else {
+    object = {};
+    object.title = $form.elements.title.value;
+    object.photoUrl = $form.elements.photoUrl.value;
+    object.notes = $form.elements.notes.value;
+    object.entryId = data.editing.entryId;
+    data.entries[data.entries.length - object.entryId] = object;
+    $ul.innerHTML = '';
+    renderAllEntries();
+    $form.reset();
+    $image.src = 'images/placeholder-image-square.jpg';
+    formToView();
+    data.editing = null;
   }
 });
 
 function renderEntry(entry) {
   var listItem = document.createElement('li');
+  listItem.setAttribute('data-entry-id', entry.entryId);
   listItem.setAttribute('class', 'container mb20');
 
   var rowDiv = document.createElement('div');
@@ -57,9 +73,18 @@ function renderEntry(entry) {
   secondColumnHalf.setAttribute('class', 'column-half');
   rowDiv.appendChild(secondColumnHalf);
 
+  var titleRow = document.createElement('div');
+  titleRow.setAttribute('class', 'flex space-between');
+  secondColumnHalf.appendChild(titleRow);
+
   var entryHeading = document.createElement('h2');
   entryHeading.textContent = entry.title;
-  secondColumnHalf.appendChild(entryHeading);
+  titleRow.appendChild(entryHeading);
+
+  var icon = document.createElement('i');
+  icon.className = 'fas fa-pen';
+  icon.id = entry.entryId;
+  titleRow.appendChild(icon);
 
   var entryParagraph = document.createElement('p');
   entryParagraph.textContent = entry.notes;
@@ -114,3 +139,16 @@ function viewToForm() {
   $entries.className = 'view hidden';
   data.view = 'entry-form';
 }
+
+$ul.addEventListener('click', function (e) {
+  if (e.target.matches('i')) {
+    viewToForm();
+    data.editing = data.entries[data.entries.length - parseInt(e.target.id)];
+    var $title = document.querySelector('#title');
+    $title.value = data.editing.title;
+    $photoUrl.value = data.editing.photoUrl;
+    $image.src = $photoUrl.value;
+    var $notes = document.querySelector('#notes');
+    $notes.value = data.editing.notes;
+  }
+});
