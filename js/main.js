@@ -124,6 +124,14 @@ var $entryForm = document.querySelector('#entry-form');
 var $entries = document.querySelector('#entries');
 
 $a.addEventListener('click', formToView);
+$a.addEventListener('click', function () {
+  if (data.editing !== null) {
+    $form.reset();
+    $image.src = 'images/placeholder-image-square.jpg';
+    formToView();
+    data.editing = null;
+  }
+});
 
 function formToView() {
   $entryForm.className = 'view hidden';
@@ -137,7 +145,7 @@ $new.addEventListener('click', viewToForm);
 $new.addEventListener('click', function () {
   $h2.textContent = 'New Entry';
   $delete.className = 'delete hidden';
-  $bottomRow.className = 'tar';
+  $bottomRow.className = 'tar mb20';
 });
 
 function viewToForm() {
@@ -149,6 +157,9 @@ function viewToForm() {
 var $delete = document.querySelector('.delete');
 var $bottomRow = document.querySelector('#bottomRow');
 
+var $title = document.querySelector('#title');
+var $notes = document.querySelector('#notes');
+
 $ul.addEventListener('click', function (e) {
   if (e.target.matches('i')) {
     $h2.textContent = 'Edit Entry';
@@ -156,11 +167,23 @@ $ul.addEventListener('click', function (e) {
     $delete.className = 'delete';
     $bottomRow.className = 'flex space-between';
     data.editing = data.entries[data.entries.length - parseInt(e.target.id)];
-    var $title = document.querySelector('#title');
     $title.value = data.editing.title;
     $photoUrl.value = data.editing.photoUrl;
     $image.src = $photoUrl.value;
-    var $notes = document.querySelector('#notes');
     $notes.value = data.editing.notes;
   }
+});
+
+var $modal = document.querySelector('.modal');
+var $overlay = document.querySelector('.overlay');
+
+$delete.addEventListener('click', function () {
+  $modal.classList.remove('hidden');
+  $overlay.classList.remove('hidden');
+});
+
+var $grayButton = document.querySelector('.gray-button');
+$grayButton.addEventListener('click', function () {
+  $overlay.className = 'overlay hidden';
+  $modal.className = 'modal hidden';
 });
