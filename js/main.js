@@ -17,6 +17,7 @@ function isImage(url) {
 }
 
 var $form = document.querySelector('form');
+var $h2 = document.querySelector('h2');
 
 $form.addEventListener('submit', function (event) {
   event.preventDefault();
@@ -133,6 +134,11 @@ function formToView() {
 var $new = document.querySelector('#new');
 
 $new.addEventListener('click', viewToForm);
+$new.addEventListener('click', function () {
+  $h2.textContent = 'New Entry';
+  $delete.className = 'delete hidden';
+  $bottomRow.className = 'tar';
+});
 
 function viewToForm() {
   $entryForm.className = 'view';
@@ -140,9 +146,15 @@ function viewToForm() {
   data.view = 'entry-form';
 }
 
+var $delete = document.querySelector('.delete');
+var $bottomRow = document.querySelector('#bottomRow');
+
 $ul.addEventListener('click', function (e) {
   if (e.target.matches('i')) {
+    $h2.textContent = 'Edit Entry';
     viewToForm();
+    $delete.className = 'delete';
+    $bottomRow.className = 'flex space-between';
     data.editing = data.entries[data.entries.length - parseInt(e.target.id)];
     var $title = document.querySelector('#title');
     $title.value = data.editing.title;

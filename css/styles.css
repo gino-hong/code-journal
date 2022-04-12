@@ -60,12 +60,12 @@ button,
   font-size: 14px;
 }
 
-.text-align-right {
-  text-align: right;
-}
-
 .tac {
   text-align: center;
+}
+
+.tar {
+  text-align: right;
 }
 
 .mb10 {
@@ -78,6 +78,11 @@ button,
 
 .mt20 {
   margin-top: 20px;
+}
+
+.margin-top-bottom-auto {
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 ul {
@@ -114,4 +119,9 @@ i {
   margin-bottom: auto;
   color: #562b81;
   font-size: 24px;
+}
+
+.delete {
+  text-decoration: underline;
+  color: #e36969;
 }
