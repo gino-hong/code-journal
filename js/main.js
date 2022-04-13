@@ -43,7 +43,11 @@ $form.addEventListener('submit', function (event) {
     object.photoUrl = $form.elements.photoUrl.value;
     object.notes = $form.elements.notes.value;
     object.entryId = data.editing.entryId;
-    data.entries[data.entries.length - object.entryId] = object;
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === object.entryId) {
+        data.entries[i] = object;
+      }
+    }
     $ul.innerHTML = '';
     renderAllEntries();
     $form.reset();
@@ -166,7 +170,11 @@ $ul.addEventListener('click', function (e) {
     viewToForm();
     $delete.className = 'delete';
     $bottomRow.className = 'flex space-between';
-    data.editing = data.entries[data.entries.length - parseInt(e.target.id)];
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === parseInt(e.target.id)) {
+        data.editing = data.entries[i];
+      }
+    }
     $title.value = data.editing.title;
     $photoUrl.value = data.editing.photoUrl;
     $image.src = $photoUrl.value;
@@ -183,7 +191,26 @@ $delete.addEventListener('click', function () {
 });
 
 var $grayButton = document.querySelector('.gray-button');
+
 $grayButton.addEventListener('click', function () {
+  $overlay.className = 'overlay hidden';
+  $modal.className = 'modal hidden';
+});
+
+var $orangeButton = document.querySelector('.orange-button');
+$orangeButton.addEventListener('click', function () {
+  var index = data.editing.entryId;
+  for (var i = 0; i < data.entries.length; i++) {
+    if (index === data.entries[i].entryId) {
+      data.entries.splice(i, 1);
+    }
+  }
+  $ul.innerHTML = '';
+  renderAllEntries();
+  $form.reset();
+  $image.src = 'images/placeholder-image-square.jpg';
+  formToView();
+  data.editing = null;
   $overlay.className = 'overlay hidden';
   $modal.className = 'modal hidden';
 });
