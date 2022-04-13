@@ -176,3 +176,7 @@ i {
 .delete:hover {
   cursor: pointer;
 }
+
+.white {
+  color: white;
+}
