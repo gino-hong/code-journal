@@ -51,11 +51,8 @@ $form.addEventListener('submit', function (event) {
     $form.reset();
     $image.src = 'images/placeholder-image-square.jpg';
     formToView();
-    $ul.prepend(renderEntry(object));
-    if (data.entries.length === 1) {
-      var $placeholder = document.querySelector('#placeholder');
-      $placeholder.remove();
-    }
+    $ul.innerHTML = '';
+    renderAllEntries();
   } else {
     object = {};
     object.title = $form.elements.title.value;
@@ -237,4 +234,18 @@ $orangeButton.addEventListener('click', function () {
   data.editing = null;
   $overlay.className = 'overlay hidden';
   $modal.className = 'modal hidden';
+});
+
+var $wide = document.querySelector('.wide');
+$wide.addEventListener('click', function () {
+  if (data.entries.length > 0) {
+    $ul.innerHTML = '';
+    var array = [];
+    for (var i = 0; i < data.entries.length; i++) {
+      array.unshift(data.entries[i]);
+    }
+    for (var j = 0; j < array.length; j++) {
+      $ul.append(renderEntry(array[j]));
+    }
+  }
 });
