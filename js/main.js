@@ -16,6 +16,25 @@ function isImage(url) {
   return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
 }
 
+var $searchbar = document.querySelector('#searchbar');
+$searchbar.addEventListener('submit', function (e) {
+  e.preventDefault();
+  $ul.innerHTML = '';
+  var search = $searchbar.elements.search.value;
+  for (var i = 0; i < data.entries.length; i++) {
+    if (search.toLowerCase() === data.entries[i].title.toLowerCase()) {
+      $ul.prepend(renderEntry(data.entries[i]));
+    }
+  }
+  if ($ul.innerHTML === '') {
+    var notFound = document.createElement('li');
+    notFound.textContent = 'No search results found.';
+    notFound.className = 'tac';
+    $ul.appendChild(notFound);
+  }
+  $searchbar.reset();
+});
+
 var $form = document.querySelector('form');
 var $h2 = document.querySelector('h2');
 
@@ -135,6 +154,9 @@ $a.addEventListener('click', function () {
     formToView();
     data.editing = null;
   }
+  $ul.innerHTML = '';
+  renderAllEntries();
+  $searchbar.reset();
 });
 
 function formToView() {
@@ -150,6 +172,7 @@ $new.addEventListener('click', function () {
   $h2.textContent = 'New Entry';
   $delete.className = 'delete hidden';
   $bottomRow.className = 'tar mb20';
+  $searchbar.reset();
 });
 
 function viewToForm() {
@@ -179,6 +202,7 @@ $ul.addEventListener('click', function (e) {
     $photoUrl.value = data.editing.photoUrl;
     $image.src = $photoUrl.value;
     $notes.value = data.editing.notes;
+    $searchbar.reset();
   }
 });
 
