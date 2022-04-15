@@ -123,7 +123,6 @@ function renderAllEntries() {
     var noEntries = document.createElement('li');
     noEntries.textContent = 'No entries have been recorded.';
     noEntries.className = 'tac';
-    noEntries.id = 'placeholder';
     $ul.appendChild(noEntries);
   }
   for (var i = 0; i < data.entries.length; i++) {
