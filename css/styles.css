@@ -122,6 +122,10 @@ i {
   font-size: 24px;
 }
 
+i:hover {
+  cursor: pointer;
+}
+
 .delete {
   text-decoration: underline;
   color: #e36969;
