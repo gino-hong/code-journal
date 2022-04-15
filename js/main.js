@@ -22,7 +22,7 @@ $searchbar.addEventListener('submit', function (e) {
   $ul.innerHTML = '';
   var search = $searchbar.elements.search.value;
   for (var i = 0; i < data.entries.length; i++) {
-    if (search === data.entries[i].title) {
+    if (search.toLowerCase() === data.entries[i].title.toLowerCase()) {
       $ul.prepend(renderEntry(data.entries[i]));
     }
   }
